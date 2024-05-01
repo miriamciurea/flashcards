@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_24_130226) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_062311) do
+  create_table "collaborations", force: :cascade do |t|
+    t.integer "flashcard_id", null: false
+    t.integer "subject_id", null: false
+    t.boolean "correct"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flashcard_id"], name: "index_collaborations_on_flashcard_id"
+    t.index ["subject_id"], name: "index_collaborations_on_subject_id"
+  end
+
   create_table "flashcards", force: :cascade do |t|
     t.text "question"
     t.text "answer"
@@ -22,16 +32,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_130226) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "subjects_flashcards", force: :cascade do |t|
-    t.integer "flashcard_id", null: false
-    t.integer "subject_id", null: false
-    t.boolean "correct"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["flashcard_id"], name: "index_subjects_flashcards_on_flashcard_id"
-    t.index ["subject_id"], name: "index_subjects_flashcards_on_subject_id"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_subjects_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -57,8 +59,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_130226) do
     t.index ["user_id"], name: "index_users_subjects_on_user_id"
   end
 
-  add_foreign_key "subjects_flashcards", "flashcards"
-  add_foreign_key "subjects_flashcards", "subjects"
+  add_foreign_key "collaborations", "flashcards"
+  add_foreign_key "collaborations", "subjects"
+  add_foreign_key "subjects", "users"
   add_foreign_key "users_subjects", "subjects"
   add_foreign_key "users_subjects", "users"
 end

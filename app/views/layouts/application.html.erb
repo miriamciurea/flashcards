@@ -15,7 +15,9 @@
 
   <%= yield %>
 
-  <%= render "shared/flashes" %>
+  <% if flash.any? %>
+    <%= render "shared/flashes" %>
+  <% end %>
 
   </body>
 </html>

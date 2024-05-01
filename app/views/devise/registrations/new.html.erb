@@ -35,4 +35,6 @@
 <div id="react-root"></div>
 <%= react_component("HelloWorld") %>
 
-<%= render "devise/shared/links" %>
+<% if resource.errors.any? %>
+  <%= render "devise/shared/links" %>
+<% end %>

@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= f.label :username %><br />
-    <%= f.username :username, autocomplete: "username" %>
+    <%= f.text_field :username, autocomplete: "username" %>
   </div>
 
   <div class="actions">
@@ -31,5 +31,8 @@
   </div>
 
 <% end %>
+
+<div id="react-root"></div>
+<%= react_component("HelloWorld") %>
 
 <%= render "devise/shared/links" %>

@@ -2,6 +2,10 @@ source "https://rubygems.org"
 
 gem 'devise'
 
+gem 'webpacker'
+
+gem 'react-rails'
+
 ruby "3.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
